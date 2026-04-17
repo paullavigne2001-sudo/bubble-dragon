@@ -54,8 +54,26 @@ let levelText = `
 `;
 
 let data = parseLevel(levelText);
-platforms = data.platforms;
-enemies = data.enemies;
+
+// 🔥 calcul hauteur niveau
+let maxY = 0;
+data.platforms.forEach(p=>{
+  if(p.y > maxY) maxY = p.y;
+});
+
+// décalage pour centrer
+let offsetY = 200 - maxY - 40;
+
+// appliquer offset
+platforms = data.platforms.map(p=>({
+  ...p,
+  y: p.y + offsetY
+}));
+
+enemies = data.enemies.map(e=>({
+  ...e,
+  y: e.y + offsetY
+}));
 
 // ==========================
 // RESET
