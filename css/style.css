@@ -5,6 +5,7 @@ body {
   justify-content:center;
   align-items:center;
   height:100vh;
+  flex-direction:column;
 }
 
 canvas {
@@ -12,4 +13,21 @@ canvas {
   height:400px;
   image-rendering: pixelated;
   border:3px solid #333;
+}
+
+#controls {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  background: #222;
+  color: white;
+  border: none;
+  border-radius: 10px;
 }
