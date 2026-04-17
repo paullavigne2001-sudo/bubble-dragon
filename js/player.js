@@ -41,7 +41,7 @@ window.updatePlayer = function(keys){
     player.onGround = true;
   }
 
-  if(keys[" "]){
+  if(keys[" "] && player.shootingTimer === 0){
     shootBubble();
     keys[" "] = false;
   }
