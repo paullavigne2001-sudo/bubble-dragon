@@ -37,7 +37,7 @@ setupEditor(canvas);
 let levelText = `
 ##########
 #        #
-#   =    #
+#   ==   #
 #        #
 #  E  E  #
 ##########
