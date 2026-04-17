@@ -102,7 +102,7 @@ function draw(){
   });
 
   // joueur
-  drawSprite(ctx, SPRITES.player, player.x, player.y, 14);
+  drawSprite(ctx, SPRITES.player, player.x, player.y, 10);
 
   // bulles
   bubbles.forEach(b=>{
