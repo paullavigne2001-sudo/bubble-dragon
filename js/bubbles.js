@@ -1,52 +1,51 @@
-// ⚠️ player défini UNE SEULE FOIS ici
-window.player = {
-  x:20,y:150,
-  vx:0,vy:0,
-  w:10,h:8,
-  onGround:false,
-  dir:1,
-  shootingTimer:0
+window.bubbles = [];
+
+window.shootBubble = function(){
+  bubbles.push({
+    x: player.x + player.w/2,
+    y: player.y + player.h/2,
+    vx: player.dir * 2,
+    vy: 0,
+    w: 8,
+    h: 8,
+    life: 0,
+    capturedEnemy: null
+  });
+
+  player.shootingTimer = 10;
 };
 
-window.updatePlayer = function(keys){
-  player.vx = 0;
+window.updateBubbles = function(){
+  bubbles.forEach(b=>{
+    b.life++;
 
-  if(keys["ArrowLeft"]){ player.vx = -2; player.dir = -1; }
-  if(keys["ArrowRight"]){ player.vx = 2; player.dir = 1; }
+    if(b.life < 20){
+      b.x += b.vx;
+    } else {
+      b.y -= 1;
+    }
 
-  if(keys["ArrowUp"] && player.onGround){
-    player.vy = -5;
-  }
+    if(!b.capturedEnemy){
+      for(let e of enemies){
+        if(!e.trapped && hit(b,e)){
+          e.trapped = true;
+          b.capturedEnemy = e;
+          break;
+        }
+      }
+    }
 
-  player.vy += 0.3;
-  player.x += player.vx;
-  player.y += player.vy;
+    if(b.capturedEnemy){
+      b.capturedEnemy.x = b.x;
+      b.capturedEnemy.y = b.y;
 
-  player.onGround = false;
-
-  platforms.forEach(p=>{
-    if(hit(player,p) && player.vy > 0){
-      player.y = p.y - player.h;
-      player.vy = 0;
-      player.onGround = true;
+      // joueur éclate la bulle → ennemi éliminé
+      if(hit(player, b)){
+        enemies = enemies.filter(e => e !== b.capturedEnemy);
+        b.life = -999; // marquer pour suppression
+      }
     }
   });
 
-  // limites écran
-  player.x = Math.max(0, Math.min(160 - player.w, player.x));
-
-  if(player.y > 200 - player.h){
-    player.y = 200 - player.h;
-    player.vy = 0;
-    player.onGround = true;
-  }
-
-  if(keys[" "] && player.shootingTimer === 0){
-    shootBubble();
-    keys[" "] = false;
-  }
-
-  if(player.shootingTimer > 0){
-    player.shootingTimer--;
-  }
+  window.bubbles = bubbles.filter(b => b.y > -20 && b.life !== -999);
 };
