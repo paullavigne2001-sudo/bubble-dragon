@@ -70,6 +70,8 @@ function spawnPlayer(){
 
 // reset
 function resetLevel(){
+  enemies = data.enemies.map(e=>({...e, y:e.y + offsetY}));
+  window.bubbles = [];
   spawnPlayer();
 }
 
