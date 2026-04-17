@@ -22,10 +22,17 @@ window.updateBubbles = function(){
     if(b.life < 30){
       b.x += b.vx;
     } else {
-      // monte jusqu'à mi-écran puis redescend, en boucle
-      b.y += b.floatVy || (b.floatVy = -0.3);
-      if(b.y < 80)  b.floatVy =  0.3;
-      if(b.y > 170) b.floatVy = -0.3;
+      // flottement sinusoïdal : chaque bulle a sa propre phase
+      if(!b.floatOffset) b.floatOffset = Math.random() * Math.PI * 2;
+      if(!b.floatOffsetX) b.floatOffsetX = Math.random() * Math.PI * 2;
+      const t = b.life * 0.03;
+      b.y += Math.sin(t + b.floatOffset) * 0.4 - 0.15;
+      b.x += Math.sin(t * 0.7 + b.floatOffsetX) * 0.3;
+      // rebondir sur les bords
+      if(b.x < 5)   b.x = 5;
+      if(b.x > 152) b.x = 152;
+      if(b.y < 12)  b.y = 12;
+      if(b.y > 185) b.y = 185;
     }
 
     if(!b.capturedEnemy){
