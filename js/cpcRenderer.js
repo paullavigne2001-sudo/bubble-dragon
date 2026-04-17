@@ -17,6 +17,16 @@ function drawRect(ctx,x,y,w,h,color){
   ctx.fillRect(x,y,w,h);
 }
 
+function drawSprite(ctx, sprite, x, y, color){
+  for(let j=0;j<sprite.length;j++){
+    for(let i=0;i<sprite[j].length;i++){
+      if(sprite[j][i] === "X"){
+        drawRect(ctx, x+i, y+j, 1, 1, color);
+      }
+    }
+  }
+}
+
 function drawScanlines(ctx){
   for(let y=0;y<200;y+=2){
     ctx.fillStyle="rgba(0,0,0,0.1)";
