@@ -1,17 +1,13 @@
-let enemies = [];
+window.enemies = [];
 
-function updateEnemies(){
+window.updateEnemies = function(){
   enemies.forEach(e=>{
 
-    // capturé → ne bouge plus seul
-    if(e.trapped){
-      return;
-    }
+    if(e.trapped) return;
 
     if(!e.vx) e.vx = 1;
 
     e.x += e.vx;
-
     e.vy += 0.2;
     e.y += e.vy;
 
@@ -29,6 +25,4 @@ function updateEnemies(){
       resetLevel();
     }
   });
-
-  enemies = enemies.filter(e=>!e.dead);
-}
+};
