@@ -28,8 +28,8 @@ function drawSprite(ctx, sprite, x, y, color){
 }
 
 function drawScanlines(ctx){
-  for(let y=0;y<200;y+=2){
-    ctx.fillStyle="rgba(0,0,0,0.1)";
-    ctx.fillRect(0,y,160,1);
+  for(let y=0; y < ctx.canvas.height; y += 2){
+    ctx.fillStyle = "rgba(0,0,0,0.1)";
+    ctx.fillRect(0, y, ctx.canvas.width, 1);
   }
 }
