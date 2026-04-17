@@ -19,10 +19,10 @@ window.updateBubbles = function(){
   bubbles.forEach(b=>{
     b.life++;
 
-    if(b.life < 20){
+    if(b.life < 30){
       b.x += b.vx;
     } else {
-      b.y -= 1;
+      b.y -= 0.3;
     }
 
     if(!b.capturedEnemy){
@@ -47,5 +47,5 @@ window.updateBubbles = function(){
     }
   });
 
-  window.bubbles = bubbles.filter(b => b.y > -20 && b.life !== -999);
+  window.bubbles = bubbles.filter(b => b.y > 0 && b.life !== -999);
 };
