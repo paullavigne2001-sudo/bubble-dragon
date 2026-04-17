@@ -6,7 +6,7 @@ let keys = {};
 addEventListener("keydown", e=>keys[e.key]=true);
 addEventListener("keyup", e=>keys[e.key]=false);
 
-// mobile
+// MOBILE
 function bindTouch(id, key){
   const el = document.getElementById(id);
 
@@ -41,6 +41,14 @@ let levelText = `
 let data = parseLevel(levelText);
 platforms = data.platforms;
 enemies = data.enemies;
+
+// ✅ FIX CRASH
+function resetLevel(){
+  player.x = 20;
+  player.y = 150;
+  player.vx = 0;
+  player.vy = 0;
+}
 
 function draw(){
   clearScreen(ctx);
