@@ -9,7 +9,7 @@ let frame = 0;
 
 function clearScreen(ctx){
   ctx.fillStyle = CPC_COLORS[0];
-  ctx.fillRect(0,0,160,200);
+  ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
 }
 
 function drawRect(ctx,x,y,w,h,color){
