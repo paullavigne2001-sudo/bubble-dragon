@@ -21,7 +21,7 @@ window.updateBubbles = function(){
 
     if(b.life < 30){
       b.x += b.vx;
-    } else {
+    } else if(b.y > 20) {
       b.y -= 0.3;
     }
 
