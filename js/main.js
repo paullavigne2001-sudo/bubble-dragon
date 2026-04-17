@@ -1,14 +1,24 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
+// ✅ FIX rendu canvas (important)
+canvas.width = 160;
+canvas.height = 200;
+
+// ==========================
+// INPUT CLAVIER
+// ==========================
 let keys = {};
 
-addEventListener("keydown", e=>keys[e.key]=true);
-addEventListener("keyup", e=>keys[e.key]=false);
+addEventListener("keydown", e => keys[e.key] = true);
+addEventListener("keyup", e => keys[e.key] = false);
 
-// MOBILE
+// ==========================
+// INPUT MOBILE
+// ==========================
 function bindTouch(id, key){
   const el = document.getElementById(id);
+  if(!el) return;
 
   el.addEventListener("touchstart", e=>{
     e.preventDefault();
@@ -26,9 +36,14 @@ bindTouch("right","ArrowRight");
 bindTouch("jump","ArrowUp");
 bindTouch("shoot"," ");
 
+// ==========================
+// ÉDITEUR
+// ==========================
 setupEditor(canvas);
 
-// LEVEL
+// ==========================
+// LEVEL (ASCII)
+// ==========================
 let levelText = `
 ##########
 #        #
@@ -42,7 +57,9 @@ let data = parseLevel(levelText);
 platforms = data.platforms;
 enemies = data.enemies;
 
-// ✅ FIX CRASH
+// ==========================
+// RESET
+// ==========================
 function resetLevel(){
   player.x = 20;
   player.y = 150;
@@ -50,27 +67,42 @@ function resetLevel(){
   player.vy = 0;
 }
 
+// ==========================
+// DRAW
+// ==========================
 function draw(){
   clearScreen(ctx);
 
-  ctx.fillStyle="#FFF";
+  // titre
+  ctx.fillStyle = "#FFF";
+  ctx.font = "6px monospace";
   ctx.fillText("BUBBLE DRAGON", 20, 10);
 
-  platforms.forEach(p=>drawRect(ctx,p.x,p.y,p.w,p.h,6));
+  // plateformes
+  platforms.forEach(p=>{
+    drawRect(ctx, p.x, p.y, p.w, p.h, 6);
+  });
 
+  // joueur
   drawSprite(ctx, SPRITES.player, player.x, player.y, 14);
 
+  // bulles
   bubbles.forEach(b=>{
     drawSprite(ctx, SPRITES.bubble, b.x, b.y, 9);
   });
 
+  // ennemis
   enemies.forEach(e=>{
-    drawSprite(ctx, SPRITES.enemy, e.x, e.y, e.trapped?15:12);
+    drawSprite(ctx, SPRITES.enemy, e.x, e.y, e.trapped ? 15 : 12);
   });
 
+  // effet CRT
   drawScanlines(ctx);
 }
 
+// ==========================
+// LOOP
+// ==========================
 function loop(){
   frame++;
 
@@ -83,4 +115,7 @@ function loop(){
   requestAnimationFrame(loop);
 }
 
+// ==========================
+// START
+// ==========================
 loop();
