@@ -5,32 +5,44 @@ function shootBubble(){
     x: player.x + player.w/2,
     y: player.y + player.h/2,
     vx: player.dir * 2,
-    vy: 0, // 🔥 plus de diagonale
-    w: 6,
-    h: 6,
-    life: 0
+    vy: 0,
+    w: 8,
+    h: 8,
+    life: 0,
+    capturedEnemy: null
   });
+
+  player.shootingTimer = 10; // animation bouche
 }
 
 function updateBubbles(){
   bubbles.forEach(b=>{
     b.life++;
 
-    // déplacement horizontal au début
+    // phase 1 : déplacement horizontal
     if(b.life < 20){
       b.x += b.vx;
     } else {
-      // puis montée verticale
+      // phase 2 : montée
       b.y -= 1;
     }
 
-    // capture ennemi
-    enemies.forEach(e=>{
-      if(!e.trapped && hit(b,e)){
-        e.trapped = true;
-      }
-    });
+    // capture
+    if(!b.capturedEnemy){
+      enemies.forEach(e=>{
+        if(!e.trapped && hit(b,e)){
+          e.trapped = true;
+          b.capturedEnemy = e;
+        }
+      });
+    }
+
+    // si ennemi capturé → il suit la bulle
+    if(b.capturedEnemy){
+      b.capturedEnemy.x = b.x;
+      b.capturedEnemy.y = b.y;
+    }
   });
 
-  bubbles = bubbles.filter(b=>b.x>0 && b.x<160 && b.y>0);
+  bubbles = bubbles.filter(b=>b.y > -20);
 }
