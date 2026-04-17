@@ -20,8 +20,14 @@ function drawRect(ctx,x,y,w,h,color){
 function drawSprite(ctx, sprite, x, y, color){
   for(let j=0;j<sprite.length;j++){
     for(let i=0;i<sprite[j].length;i++){
-      if(sprite[j][i] === "X"){
+      let c = sprite[j][i];
+
+      if(c === "X"){
         drawRect(ctx, x+i, y+j, 1, 1, color);
+      }
+
+      if(c === "O"){
+        drawRect(ctx, x+i, y+j, 1, 1, 15); // blanc
       }
     }
   }
