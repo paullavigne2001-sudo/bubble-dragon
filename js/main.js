@@ -30,31 +30,31 @@ bindTouch("right","ArrowRight");
 bindTouch("jump","ArrowUp");
 bindTouch("shoot"," ");
 
-// éditeur
+// editeur
 setupEditor(canvas);
 
 // LEVEL
 let levelText = `
 ##########
 #        #
-#   ==   #
+#  E     #
+# ====   #
 #        #
-#  E  E  #
+#     E  #
+#  ====  #
+#        #
+#  E     #
+# ====   #
+#        #
 ##########
 `;
 
 let data = parseLevel(levelText);
 
-// centrage niveau
-let maxY = 0;
-data.platforms.forEach(p=>{
-  if(p.y > maxY) maxY = p.y;
-});
+let offsetY = 0;
 
-let offsetY = (200 - maxY) / 2;
-
-platforms = data.platforms.map(p=>({...p, y:p.y + offsetY}));
-enemies = data.enemies.map(e=>({...e, y:e.y + offsetY}));
+platforms = data.platforms.map(p=>({...p}));
+enemies = data.enemies.map(e=>({...e}));
 
 // spawn joueur
 spawnPlayer();
@@ -70,7 +70,7 @@ function spawnPlayer(){
 
 // reset
 function resetLevel(){
-  enemies = data.enemies.map(e=>({...e, y:e.y + offsetY}));
+  enemies = data.enemies.map(e=>({...e}));
   window.bubbles = [];
   spawnPlayer();
 }
@@ -88,8 +88,8 @@ function draw(){
   });
 
   if(typeof SPRITES !== "undefined"){
-    let sprite = player.shootingTimer > 0 
-      ? SPRITES.player_shoot 
+    let sprite = player.shootingTimer > 0
+      ? SPRITES.player_shoot
       : SPRITES.player_idle;
 
     drawSprite(ctx, sprite, player.x, player.y, 10);
