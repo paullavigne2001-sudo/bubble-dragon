@@ -38,8 +38,14 @@ window.updateBubbles = function(){
     if(b.capturedEnemy){
       b.capturedEnemy.x = b.x;
       b.capturedEnemy.y = b.y;
+
+      // joueur éclate la bulle → ennemi éliminé
+      if(hit(player, b)){
+        enemies = enemies.filter(e => e !== b.capturedEnemy);
+        b.life = -999; // marquer pour suppression
+      }
     }
   });
 
-  bubbles = bubbles.filter(b=>b.y > -20);
+  window.bubbles = bubbles.filter(b => b.y > -20 && b.life !== -999);
 };
