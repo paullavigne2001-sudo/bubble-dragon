@@ -1,13 +1,14 @@
 const SPRITES = {
+
   player: [
-    "  XX  ",
-    " XXXX ",
-    "XXXXXX",
-    "XX  XX",
-    "XXXXXX",
-    "X XX X",
-    "X    X",
-    "      "
+    "  XX      ",
+    " XXXX     ",
+    "XXXXXX XX ",
+    "XX  XXXX  ",
+    "XXXXXX    ",
+    "XX XX     ",
+    "X  X      ",
+    "          "
   ],
 
   enemy: [
