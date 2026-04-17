@@ -1,6 +1,6 @@
-let bubbles = [];
+window.bubbles = [];
 
-function shootBubble(){
+window.shootBubble = function(){
   bubbles.push({
     x: player.x + player.w/2,
     y: player.y + player.h/2,
@@ -12,32 +12,29 @@ function shootBubble(){
     capturedEnemy: null
   });
 
-  player.shootingTimer = 10; // animation bouche
-}
+  player.shootingTimer = 10;
+};
 
-function updateBubbles(){
+window.updateBubbles = function(){
   bubbles.forEach(b=>{
     b.life++;
 
-    // phase 1 : déplacement horizontal
     if(b.life < 20){
       b.x += b.vx;
     } else {
-      // phase 2 : montée
       b.y -= 1;
     }
 
-    // capture
     if(!b.capturedEnemy){
-      enemies.forEach(e=>{
+      for(let e of enemies){
         if(!e.trapped && hit(b,e)){
           e.trapped = true;
           b.capturedEnemy = e;
+          break;
         }
-      });
+      }
     }
 
-    // si ennemi capturé → il suit la bulle
     if(b.capturedEnemy){
       b.capturedEnemy.x = b.x;
       b.capturedEnemy.y = b.y;
@@ -45,4 +42,4 @@ function updateBubbles(){
   });
 
   bubbles = bubbles.filter(b=>b.y > -20);
-}
+};
