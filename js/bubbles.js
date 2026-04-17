@@ -21,8 +21,11 @@ window.updateBubbles = function(){
 
     if(b.life < 30){
       b.x += b.vx;
-    } else if(b.y > 1) {
-      b.y -= 0.3;
+    } else {
+      // monte jusqu'à mi-écran puis redescend, en boucle
+      b.y += b.floatVy || (b.floatVy = -0.3);
+      if(b.y < 80)  b.floatVy =  0.3;
+      if(b.y > 170) b.floatVy = -0.3;
     }
 
     if(!b.capturedEnemy){
@@ -47,5 +50,5 @@ window.updateBubbles = function(){
     }
   });
 
-  window.bubbles = bubbles.filter(b => b.y > 0 && b.life !== -999);
+  window.bubbles = bubbles.filter(b => b.life !== -999);
 };
