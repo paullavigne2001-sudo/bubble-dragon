@@ -6,8 +6,29 @@ let keys = {};
 addEventListener("keydown", e=>keys[e.key]=true);
 addEventListener("keyup", e=>keys[e.key]=false);
 
+// mobile
+function bindTouch(id, key){
+  const el = document.getElementById(id);
+
+  el.addEventListener("touchstart", e=>{
+    e.preventDefault();
+    keys[key] = true;
+  });
+
+  el.addEventListener("touchend", e=>{
+    e.preventDefault();
+    keys[key] = false;
+  });
+}
+
+bindTouch("left","ArrowLeft");
+bindTouch("right","ArrowRight");
+bindTouch("jump","ArrowUp");
+bindTouch("shoot"," ");
+
 setupEditor(canvas);
 
+// LEVEL
 let levelText = `
 ##########
 #        #
@@ -24,13 +45,19 @@ enemies = data.enemies;
 function draw(){
   clearScreen(ctx);
 
-  platforms.forEach(p=>drawRect(ctx,p.x,p.y,p.w,p.h,6));
-  drawRect(ctx,player.x,player.y,player.w,player.h,14);
+  ctx.fillStyle="#FFF";
+  ctx.fillText("BUBBLE DRAGON", 20, 10);
 
-  bubbles.forEach(b=>drawRect(ctx,b.x,b.y,b.w,b.h,9));
+  platforms.forEach(p=>drawRect(ctx,p.x,p.y,p.w,p.h,6));
+
+  drawSprite(ctx, SPRITES.player, player.x, player.y, 14);
+
+  bubbles.forEach(b=>{
+    drawSprite(ctx, SPRITES.bubble, b.x, b.y, 9);
+  });
 
   enemies.forEach(e=>{
-    drawRect(ctx,e.x,e.y,e.w,e.h,e.trapped?15:12);
+    drawSprite(ctx, SPRITES.enemy, e.x, e.y, e.trapped?15:12);
   });
 
   drawScanlines(ctx);
