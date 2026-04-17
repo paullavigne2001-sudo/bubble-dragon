@@ -62,7 +62,7 @@ data.platforms.forEach(p=>{
 });
 
 // décalage pour centrer
-let offsetY = 200 - maxY - 40;
+let offsetY = (200 - maxY) / 2;
 
 // appliquer offset
 platforms = data.platforms.map(p=>({
