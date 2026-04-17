@@ -101,8 +101,12 @@ function draw(){
     drawRect(ctx, p.x, p.y, p.w, p.h, 6);
   });
 
-  // joueur
-  drawSprite(ctx, SPRITES.player, player.x, player.y, 10);
+  // joueur avec animation
+  let sprite = player.shootingTimer > 0 
+    ? SPRITES.player_shoot 
+    : SPRITES.player_idle;
+
+drawSprite(ctx, sprite, player.x, player.y, 10);
 
   // bulles
   bubbles.forEach(b=>{
