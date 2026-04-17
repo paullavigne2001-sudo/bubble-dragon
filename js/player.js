@@ -1,5 +1,5 @@
-// ⚠️ NE DOIT EXISTER QU’UNE SEULE FOIS
-let player = {
+// ⚠️ player défini UNE SEULE FOIS ici
+window.player = {
   x:20,y:150,
   vx:0,vy:0,
   w:10,h:8,
@@ -8,7 +8,7 @@ let player = {
   shootingTimer:0
 };
 
-function updatePlayer(keys){
+window.updatePlayer = function(keys){
   player.vx = 0;
 
   if(keys["ArrowLeft"]){ player.vx = -2; player.dir = -1; }
@@ -33,8 +33,7 @@ function updatePlayer(keys){
   });
 
   // limites écran
-  if(player.x < 0) player.x = 0;
-  if(player.x > 160 - player.w) player.x = 160 - player.w;
+  player.x = Math.max(0, Math.min(160 - player.w, player.x));
 
   if(player.y > 200 - player.h){
     player.y = 200 - player.h;
@@ -42,7 +41,6 @@ function updatePlayer(keys){
     player.onGround = true;
   }
 
-  // tir
   if(keys[" "]){
     shootBubble();
     keys[" "] = false;
@@ -51,4 +49,4 @@ function updatePlayer(keys){
   if(player.shootingTimer > 0){
     player.shootingTimer--;
   }
-}
+};
