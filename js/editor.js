@@ -21,6 +21,6 @@ function setupEditor(canvas){
 
   addEventListener("keydown", e=>{
     if(e.key==="e") editMode = !editMode;
-    if(e.key==="s") console.log(JSON.stringify({platforms,enemies},null,2));
+    if(e.key==="d") downloadLevel();
   });
 }
