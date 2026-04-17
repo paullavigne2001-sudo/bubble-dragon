@@ -3,7 +3,8 @@ body {
   background:#000;
   display:flex;
   justify-content:center;
-  align-items:center;
+  align-items:flex-start;
+  padding-top:20px;
   height:100vh;
   flex-direction:column;
 }
