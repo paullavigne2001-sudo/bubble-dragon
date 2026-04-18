@@ -43,6 +43,15 @@ window.updateBubbles = function(){
       }
     }
 
+    // eclate apres 10 secondes (600 frames)
+    if(b.life > 600){
+      if(b.capturedEnemy){
+        b.capturedEnemy.trapped = false;
+        b.capturedEnemy.vx = 1;
+      }
+      b.life = -999;
+    }
+
     if(b.capturedEnemy){
       b.capturedEnemy.x = b.x;
       b.capturedEnemy.y = b.y;
