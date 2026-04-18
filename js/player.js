@@ -32,8 +32,8 @@ window.updatePlayer = function(keys){
     }
   });
 
-  // limites écran
-  player.x = Math.max(0, Math.min(160 - player.w, player.x));
+  // limites murs lateraux (16px = largeur des murs)
+  player.x = Math.max(16, Math.min(144 - player.w, player.x));
 
   if(player.y > 200 - player.h){
     player.y = 200 - player.h;
