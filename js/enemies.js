@@ -5,7 +5,7 @@ window.updateEnemies = function(){
 
     if(e.trapped) return;
 
-    if(!e.vx) e.vx = 1;
+    if(!e.vx) e.vx = 0.5;
     if(!e.jumpTimer) e.jumpTimer = Math.floor(Math.random() * 120) + 60;
 
     e.jumpTimer--;
@@ -39,8 +39,8 @@ window.updateEnemies = function(){
     });
 
     // limites horizontales
-    if(e.x <= 16){ e.x = 16; e.vx = 1; }
-    if(e.x >= 144 - e.w){ e.x = 144 - e.w; e.vx = -1; }
+    if(e.x <= 16){ e.x = 16; e.vx = 0.5; }
+    if(e.x >= 144 - e.w){ e.x = 144 - e.w; e.vx = -0.5; }
 
     // limite basse
     if(e.y >= 192 - e.h){
