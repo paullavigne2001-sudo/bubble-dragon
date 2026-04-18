@@ -26,15 +26,18 @@ window.updatePlayer = function(keys){
   platforms.forEach(p=>{
     if(!hit(player, p)) return;
 
-    // collision par le bas : atterrissage
-    if(player.vy > 0){
+    const wasAbove = (player.y + player.h - player.vy) <= p.y;
+    const wasBelow = (player.y - player.vy) >= (p.y + p.h);
+
+    // atterrissage : le joueur venait d'au-dessus
+    if(player.vy > 0 && wasAbove){
       player.y = p.y - player.h;
       player.vy = 0;
       player.onGround = true;
     }
 
-    // collision par le haut : seulement sur les murs solides (#)
-    if(player.vy < 0 && p.solid){
+    // plafond solide : le joueur venait d'en dessous
+    if(player.vy < 0 && p.solid && wasBelow){
       player.y = p.y + p.h;
       player.vy = 0;
     }
