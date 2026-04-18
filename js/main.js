@@ -60,13 +60,11 @@ enemies = data.enemies.map(e=>({...e, y: e.y + offsetY}));
 spawnPlayer();
 
 function spawnPlayer(){
-  if(platforms.length === 0) return;
-
-  // plateforme la plus basse (y max)
-  let p = platforms.reduce((a,b)=> b.y > a.y ? b : a);
-
-  player.x = p.x + p.w/2 - player.w/2;
-  player.y = p.y - player.h;
+  // position fixe : bas gauche de la zone de jeu (interieur des murs)
+  player.x = 20;
+  player.y = 200 - 16 - player.h; // au-dessus du sol (16px = hauteur du sol)
+  player.vx = 0;
+  player.vy = 0;
 }
 
 // reset
