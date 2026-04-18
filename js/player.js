@@ -35,8 +35,8 @@ window.updatePlayer = function(keys){
   // limites murs lateraux (16px = largeur des murs)
   player.x = Math.max(16, Math.min(144 - player.w, player.x));
 
-  if(player.y > 200 - player.h){
-    player.y = 200 - player.h;
+  if(player.y > 192 - player.h){
+    player.y = 192 - player.h;
     player.vy = 0;
     player.onGround = true;
   }
