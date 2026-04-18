@@ -10,19 +10,19 @@ function parseLevel(text){
     [...line].forEach((c,x)=>{
 
       if(c === "#"){
-        platforms.push({x:x*TILE,y:y*TILE,w:TILE,h:TILE});
+        platforms.push({x:x*TILE, y:y*TILE, w:TILE, h:TILE, solid:true});
       }
 
       if(c === "="){
-        platforms.push({x:x*TILE,y:y*TILE,w:TILE,h:5});
+        platforms.push({x:x*TILE, y:y*TILE, w:TILE, h:5, solid:false});
       }
 
       if(c === "E"){
-        enemies.push({x:x*TILE,y:y*TILE,vx:1,vy:0,w:10,h:10,trapped:false});
+        enemies.push({x:x*TILE, y:y*TILE, vx:1, vy:0, w:10, h:10, trapped:false});
       }
 
     });
   });
 
-  return {platforms,enemies};
+  return {platforms, enemies};
 }
