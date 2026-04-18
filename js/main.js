@@ -33,7 +33,7 @@ bindTouch("shoot"," ");
 // editeur
 setupEditor(canvas);
 
-// LEVEL
+// LEVEL — 10 colonnes x 16px = 160px, 12 lignes x 16px = 192px + 8px sol bas
 let levelText = `
 ##########
 #        #
@@ -51,10 +51,10 @@ let levelText = `
 
 let data = parseLevel(levelText);
 
-let offsetY = 0;
+let offsetY = 8;
 
-platforms = data.platforms.map(p=>({...p}));
-enemies = data.enemies.map(e=>({...e}));
+platforms = data.platforms.map(p=>({...p, y: p.y + offsetY}));
+enemies = data.enemies.map(e=>({...e, y: e.y + offsetY}));
 
 // spawn joueur
 spawnPlayer();
@@ -62,6 +62,7 @@ spawnPlayer();
 function spawnPlayer(){
   if(platforms.length === 0) return;
 
+  // plateforme la plus basse (y max)
   let p = platforms.reduce((a,b)=> b.y > a.y ? b : a);
 
   player.x = p.x + p.w/2 - player.w/2;
@@ -70,7 +71,7 @@ function spawnPlayer(){
 
 // reset
 function resetLevel(){
-  enemies = data.enemies.map(e=>({...e}));
+  enemies = data.enemies.map(e=>({...e, y: e.y + offsetY}));
   window.bubbles = [];
   spawnPlayer();
 }
