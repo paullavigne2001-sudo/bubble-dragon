@@ -30,7 +30,7 @@ window.updateBubbles = function(){
       if(b.x < 5)   b.x = 5;
       if(b.x > 152) b.x = 152;
       if(b.y < 12)  b.y = 12;
-      if(b.y > 185) b.y = 185;
+      if(b.y > 176) b.y = 176;
     }
 
     if(!b.capturedEnemy){
