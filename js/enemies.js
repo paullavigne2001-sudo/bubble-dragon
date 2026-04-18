@@ -6,8 +6,6 @@ window.updateEnemies = function(){
     if(e.trapped) return;
 
     if(!e.vx) e.vx = 1;
-
-    // init jump timer
     if(!e.jumpTimer) e.jumpTimer = Math.floor(Math.random() * 120) + 60;
 
     e.jumpTimer--;
@@ -24,14 +22,23 @@ window.updateEnemies = function(){
     e.onGround = false;
 
     platforms.forEach(p=>{
-      if(hit(e,p) && e.vy > 0){
+      if(!hit(e, p)) return;
+
+      // atterrissage
+      if(e.vy > 0){
         e.y = p.y - e.h;
         e.vy = 0;
         e.onGround = true;
       }
+
+      // plafond solide uniquement
+      if(e.vy < 0 && p.solid){
+        e.y = p.y + p.h;
+        e.vy = 0;
+      }
     });
 
-    // limites horizontales (interieur des murs)
+    // limites horizontales
     if(e.x <= 16){ e.x = 16; e.vx = 1; }
     if(e.x >= 144 - e.w){ e.x = 144 - e.w; e.vx = -1; }
 
@@ -42,7 +49,7 @@ window.updateEnemies = function(){
       e.onGround = true;
     }
 
-    if(hit(e,player)){
+    if(hit(e, player)){
       resetLevel();
     }
   });
