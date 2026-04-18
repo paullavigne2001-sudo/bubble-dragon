@@ -23,8 +23,8 @@ window.updateEnemies = function(){
     if(e.x >= 144 - e.w){ e.x = 144 - e.w; e.vx = -1; }
 
     // limite basse : ne pas sortir de l'ecran
-    if(e.y >= 200 - e.h){
-      e.y = 200 - e.h;
+    if(e.y >= 192 - e.h){
+      e.y = 192 - e.h;
       e.vy = 0;
     }
 
