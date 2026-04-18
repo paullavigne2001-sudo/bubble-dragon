@@ -29,6 +29,11 @@ window.updatePlayer = function(keys){
       player.vy = 0;
       player.onGround = true;
     }
+    // collision par le haut
+    if(hit(player,p) && player.vy < 0){
+      player.y = p.y + p.h;
+      player.vy = 0;
+    }
   });
 
   // limites murs lateraux (16px = largeur des murs)
