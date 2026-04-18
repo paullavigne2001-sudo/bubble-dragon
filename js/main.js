@@ -33,7 +33,7 @@ bindTouch("shoot"," ");
 // editeur
 setupEditor(canvas);
 
-// LEVEL — 10 colonnes x 16px = 160px, 12 lignes x 16px = 192px
+// LEVEL - 10 colonnes x 16px = 160px, 12 lignes x 16px = 192px
 let levelText = `
 ##########
 #        #
