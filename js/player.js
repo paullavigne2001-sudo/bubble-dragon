@@ -1,4 +1,3 @@
-// ⚠️ player défini UNE SEULE FOIS ici
 window.player = {
   x:20,y:150,
   vx:0,vy:0,
