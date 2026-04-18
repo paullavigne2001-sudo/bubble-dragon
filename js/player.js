@@ -14,7 +14,7 @@ window.updatePlayer = function(keys){
   if(keys["ArrowRight"]){ player.vx = 2;  player.dir =  1; }
 
   if(keys["ArrowUp"] && player.onGround){
-    player.vy = -7;
+    player.vy = -6;
   }
 
   player.vy += 0.3;
